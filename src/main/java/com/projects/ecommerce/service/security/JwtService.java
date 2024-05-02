@@ -17,6 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private static final String SECRET_KEY = "0384a52f2f98162c79213ca0101fd300075dd53318c4dc159bbe41ae6be5fa07";
+    private final static String EMAIL_KEY="0384a52f2f98162c79213ca0101fd300075dd53318c4dc159bbe41ae6be5fa07";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,6 +45,15 @@ public class JwtService {
                 .signWith(getSigninKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+    public String generateEmailToken(
+           String userEmail
+    ){
+        return Jwts.builder()
+                .claim(EMAIL_KEY,userEmail)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .compact();
+    }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
@@ -68,7 +78,7 @@ public class JwtService {
     }
 
     private Key getSigninKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(JwtService.SECRET_KEY);
 
         return Keys.hmacShaKeyFor(keyBytes);
 

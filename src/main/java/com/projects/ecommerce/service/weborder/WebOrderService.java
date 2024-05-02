@@ -1,4 +1,4 @@
-package com.projects.ecommerce.service;
+package com.projects.ecommerce.service.weborder;
 
 import com.projects.ecommerce.model.User;
 import com.projects.ecommerce.model.WebOrder;

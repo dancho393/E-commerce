@@ -1,4 +1,4 @@
-package com.projects.ecommerce.service;
+package com.projects.ecommerce.service.product;
 
 import com.projects.ecommerce.api.model.product.CreateProductBody;
 import com.projects.ecommerce.model.Inventory;

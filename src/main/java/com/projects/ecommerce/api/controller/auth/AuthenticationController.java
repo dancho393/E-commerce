@@ -3,7 +3,7 @@ package com.projects.ecommerce.api.controller.auth;
 import com.projects.ecommerce.api.exception.UserAlreadyExistsException;
 import com.projects.ecommerce.api.model.user.LoginBody;
 import com.projects.ecommerce.api.model.user.RegistrationBody;
-import com.projects.ecommerce.service.UserService;
+import com.projects.ecommerce.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,5 +29,9 @@ public class AuthenticationController {
     public ResponseEntity<String> loginUser(@Valid @RequestBody LoginBody loginBody)
             throws UserAlreadyExistsException {
         return ResponseEntity.ok(userService.login(loginBody));
+    }
+    @PatchMapping("/verify")
+    public ResponseEntity<String> verifyEmail(@RequestParam String token){
+        return ResponseEntity.ok(userService.verifyEmail(token));
     }
 }
