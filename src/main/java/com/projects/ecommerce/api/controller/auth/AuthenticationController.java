@@ -3,11 +3,13 @@ package com.projects.ecommerce.api.controller.auth;
 import com.projects.ecommerce.api.exception.UserAlreadyExistsException;
 import com.projects.ecommerce.api.model.user.LoginBody;
 import com.projects.ecommerce.api.model.user.RegistrationBody;
+import com.projects.ecommerce.model.User;
 import com.projects.ecommerce.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,5 +35,9 @@ public class AuthenticationController {
     @PatchMapping("/verify")
     public ResponseEntity<String> verifyEmail(@RequestParam String token){
         return ResponseEntity.ok(userService.verifyEmail(token));
+    }
+    @GetMapping("/me")
+    public ResponseEntity<User> currentUserInfo(@AuthenticationPrincipal User user){
+        return ResponseEntity.ok(user);
     }
 }

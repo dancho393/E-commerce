@@ -1,5 +1,6 @@
 package com.projects.ecommerce.service.user;
 
+import com.projects.ecommerce.api.exception.AccountNotVerifiedException;
 import com.projects.ecommerce.api.exception.TokenNotFound;
 import com.projects.ecommerce.api.exception.UserAlreadyExistsException;
 import com.projects.ecommerce.api.exception.UserNotFoundException;
@@ -56,6 +57,7 @@ public class UserService {
         System.out.println("Token In The UserService:"+verificationToken.getToken());
         return "Please Verify Your Account To Activate It";
     }
+    @Transactional
     public String login(LoginBody loginBody){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -65,6 +67,8 @@ public class UserService {
         );
         var user = userRepository.findByUsernameIgnoreCase(loginBody.getUsername())
                 .orElseThrow(()->new UserNotFoundException("User Not Found"));
+        if(!user.isEnabled())
+            throw new AccountNotVerifiedException("Please Verify Your Account First(Email)");
         return jwtService.generateToken(user);
     }
     @Transactional
