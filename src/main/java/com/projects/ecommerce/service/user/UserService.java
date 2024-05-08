@@ -81,6 +81,11 @@ public class UserService {
         User user= verificationToken.getUser();
         user.setEmailVerified(true);
         userRepository.save(user);
+        verificationTokenRepository.delete(verificationToken);
         return "You Verified Your Email Token";
+    }
+    public User getAuthenticatedUser(User user){
+        return userRepository.findById(user.getId())
+                .orElseThrow(()-> new UserNotFoundException("User Not Found"));
     }
 }

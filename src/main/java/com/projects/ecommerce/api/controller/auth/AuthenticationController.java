@@ -36,8 +36,5 @@ public class AuthenticationController {
     public ResponseEntity<String> verifyEmail(@RequestParam String token){
         return ResponseEntity.ok(userService.verifyEmail(token));
     }
-    @GetMapping("/me")
-    public ResponseEntity<User> currentUserInfo(@AuthenticationPrincipal User user){
-        return ResponseEntity.ok(user);
-    }
+
 }

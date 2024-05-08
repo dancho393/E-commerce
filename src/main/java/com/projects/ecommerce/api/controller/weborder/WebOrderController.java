@@ -1,13 +1,13 @@
 package com.projects.ecommerce.api.controller.weborder;
 
+import com.projects.ecommerce.api.model.weborder.CreateWebOrderBody;
 import com.projects.ecommerce.model.User;
 import com.projects.ecommerce.model.WebOrder;
 import com.projects.ecommerce.service.weborder.WebOrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +20,13 @@ public class WebOrderController {
     @GetMapping
     public List<WebOrder> getOrders(@AuthenticationPrincipal final User user) {
         return webOrderService.getOrders(user);
+    }
+    @PostMapping
+    public ResponseEntity<String> createOrder(
+            @AuthenticationPrincipal User user,
+            @RequestBody CreateWebOrderBody createWebOrderBody
+            ){
+        return ResponseEntity.ok(webOrderService.createOrder(createWebOrderBody, user));
+
     }
 }

@@ -1,5 +1,6 @@
 package com.projects.ecommerce.service.product;
 
+import com.projects.ecommerce.api.exception.EntityNotFoundException;
 import com.projects.ecommerce.api.model.product.CreateProductBody;
 import com.projects.ecommerce.model.Inventory;
 import com.projects.ecommerce.model.Product;
@@ -28,5 +29,9 @@ public class ProductService {
                 .product(product)
                 .build();
         inventoryRepository.save(inventory);
+    }
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).
+                orElseThrow(()-> new EntityNotFoundException("Product not found"));
     }
 }

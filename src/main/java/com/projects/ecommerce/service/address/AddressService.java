@@ -1,5 +1,6 @@
 package com.projects.ecommerce.service.address;
 
+import com.projects.ecommerce.api.exception.EntityNotFoundException;
 import com.projects.ecommerce.api.model.address.CreateAddressBody;
 import com.projects.ecommerce.model.Address;
 import com.projects.ecommerce.model.User;
@@ -19,5 +20,10 @@ public class AddressService {
         addressRepository.save(address);
         
         return "Address created";
+    }
+    public Address findAddressById(Long id) {
+        return addressRepository.findById(id)
+                .orElseThrow(
+                        ()-> new EntityNotFoundException("No address found with id: " + id));
     }
 }
