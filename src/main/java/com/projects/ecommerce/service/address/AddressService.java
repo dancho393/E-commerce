@@ -14,13 +14,7 @@ import org.springframework.stereotype.Service;
 public class AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
-    public String createAddress(CreateAddressBody createAddressBody, User user) {
-        Address address = addressMapper.bodyToAddress(createAddressBody);
-        address.setUser(user);
-        addressRepository.save(address);
-        
-        return "Address created";
-    }
+
     public Address findAddressById(Long id) {
         return addressRepository.findById(id)
                 .orElseThrow(
