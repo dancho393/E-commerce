@@ -1,6 +1,9 @@
 package com.projects.ecommerce.api.controller.product;
 
 import com.projects.ecommerce.api.model.product.CreateProductBody;
+import com.projects.ecommerce.api.model.product.create.CreateProductOperation;
+import com.projects.ecommerce.api.model.product.create.CreateProductRequest;
+import com.projects.ecommerce.api.model.product.create.CreateProductResponse;
 import com.projects.ecommerce.model.Product;
 import com.projects.ecommerce.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/products")
 public class ProductController {
-    private final ProductService productService;
+
+    private final CreateProductOperation createProductOperation;
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+        return null;
     }
     @PostMapping
-    public ResponseEntity<String> getProductById(@RequestBody CreateProductBody createProductBody) {
-        productService.createProduct(createProductBody);
-        return ResponseEntity.ok("Created");
+    public ResponseEntity<CreateProductResponse> getProductById(@RequestBody CreateProductRequest request) {
+
+        return ResponseEntity.ok(createProductOperation.process(request));
     }
 }

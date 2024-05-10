@@ -1,6 +1,7 @@
 package com.projects.ecommerce.model.mapper;
 
 import com.projects.ecommerce.api.model.product.CreateProductBody;
+import com.projects.ecommerce.api.model.product.create.CreateProductRequest;
 import com.projects.ecommerce.model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,5 +13,5 @@ public interface ProductMapper {
 
     @Mapping(target = "id",ignore = true)
     @Mapping(target = "inventory", ignore = true)
-    Product BodyToProduct(CreateProductBody createProductBody);
+    Product BodyToProduct(CreateProductRequest createProductRequest);
 }

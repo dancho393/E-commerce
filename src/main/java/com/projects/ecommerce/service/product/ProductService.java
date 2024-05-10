@@ -22,14 +22,7 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
-    public void createProduct(CreateProductBody createProductBody) {
-        Product product = productMapper.BodyToProduct(createProductBody);
-        productRepository.save(product);
-        Inventory inventory = Inventory.builder()
-                .product(product)
-                .build();
-        inventoryRepository.save(inventory);
-    }
+
     public Product getProductById(Long id) {
         return productRepository.findById(id).
                 orElseThrow(()-> new EntityNotFoundException("Product not found"));

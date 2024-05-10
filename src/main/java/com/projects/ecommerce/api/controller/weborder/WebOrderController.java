@@ -1,6 +1,9 @@
 package com.projects.ecommerce.api.controller.weborder;
 
 import com.projects.ecommerce.api.model.weborder.CreateWebOrderBody;
+import com.projects.ecommerce.api.model.weborder.create.CreateWebOrderOperation;
+import com.projects.ecommerce.api.model.weborder.create.CreateWebOrderRequest;
+import com.projects.ecommerce.api.model.weborder.create.CreateWebOrderResponse;
 import com.projects.ecommerce.model.User;
 import com.projects.ecommerce.model.WebOrder;
 import com.projects.ecommerce.service.weborder.WebOrderService;
@@ -16,18 +19,20 @@ import java.util.List;
 @RequestMapping("/api/v1/web-orders")
 @RequiredArgsConstructor
 public class WebOrderController {
-    private final WebOrderService webOrderService;
+    private final CreateWebOrderOperation createOrder;
 
     @GetMapping
     public List<WebOrder> getOrders(@AuthenticationPrincipal final User user) {
-        return webOrderService.getOrders(user);
+        return null;
+        //return webOrderService.getOrders(user);
     }
     @PostMapping
-    public ResponseEntity<String> createOrder(
+    public ResponseEntity<CreateWebOrderResponse> createOrder(
             @AuthenticationPrincipal User user,
-            @RequestBody CreateWebOrderBody createWebOrderBody
+            @RequestBody CreateWebOrderRequest request
             ){
-        return ResponseEntity.ok(webOrderService.createOrder(createWebOrderBody, user));
+        request.setUser(user);
+        return ResponseEntity.ok(createOrder.process(request));
 
     }
 }
