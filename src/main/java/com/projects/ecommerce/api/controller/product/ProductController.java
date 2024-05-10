@@ -1,11 +1,9 @@
 package com.projects.ecommerce.api.controller.product;
 
-import com.projects.ecommerce.api.model.product.CreateProductBody;
 import com.projects.ecommerce.api.model.product.create.CreateProductOperation;
 import com.projects.ecommerce.api.model.product.create.CreateProductRequest;
 import com.projects.ecommerce.api.model.product.create.CreateProductResponse;
 import com.projects.ecommerce.model.Product;
-import com.projects.ecommerce.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,7 +2,6 @@ package com.projects.ecommerce.service.weborder;
 
 import com.projects.ecommerce.api.model.address.findbyid.FindAddressByIdOperation;
 import com.projects.ecommerce.api.model.address.findbyid.FindAddressByIdRequest;
-import com.projects.ecommerce.api.model.product.create.CreateProductOperation;
 import com.projects.ecommerce.api.model.weborder.create.CreateWebOrderOperation;
 import com.projects.ecommerce.api.model.weborder.create.CreateWebOrderRequest;
 import com.projects.ecommerce.api.model.weborder.create.CreateWebOrderResponse;
@@ -12,8 +11,6 @@ import com.projects.ecommerce.model.Address;
 import com.projects.ecommerce.model.WebOrder;
 import com.projects.ecommerce.model.WebOrderQuantities;
 import com.projects.ecommerce.model.repository.WebOrderRepository;
-import com.projects.ecommerce.service.address.AddressService;
-import com.projects.ecommerce.service.weborderquantites.WebOrderQuantitiesService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
