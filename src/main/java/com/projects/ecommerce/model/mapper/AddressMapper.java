@@ -1,6 +1,5 @@
 package com.projects.ecommerce.model.mapper;
 
-import com.projects.ecommerce.api.model.address.CreateAddressBody;
 import com.projects.ecommerce.api.model.address.create.CreateAddressRequest;
 import com.projects.ecommerce.model.Address;
 import org.mapstruct.Mapper;

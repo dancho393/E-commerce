@@ -1,41 +1,41 @@
-package com.projects.ecommerce.service.user;
+package com.projects.ecommerce.service.verificationtoken;
 
 import com.projects.ecommerce.api.exception.MailFailureException;
-
-import com.projects.ecommerce.model.VerificationToken;
+import com.projects.ecommerce.api.model.passwordresettoekn.sendEmail.SendPasswordTokenOperation;
+import com.projects.ecommerce.api.model.passwordresettoekn.sendEmail.SendPasswordTokenRequest;
+import com.projects.ecommerce.api.model.passwordresettoekn.sendEmail.SendPasswordTokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class EmailService implements EmailSender{
-
-
-    private final JavaMailSender mailSender;
+public class SendPasswordTokenService implements SendPasswordTokenOperation {
+    private final MailSender mailSender;
     @Value("${email.from}")
     private  String fromAddress;
     @Value("${email.subject}")
     private String subject;
-    @Value("${account.confirm.url}")
+    @Value("${password.reset.url}")
     private String url;
     @Override
-    public void send(VerificationToken verificationToken) {
+    public SendPasswordTokenResponse process(SendPasswordTokenRequest request) {
         SimpleMailMessage message = getSimpleMailMessage();
-        message.setTo(verificationToken.getUser().getEmail());
+        message.setTo(request.email());
         message.setSubject(subject);
-        //Make it app property value
-        message.setText("Please follow the link below to verify your email to activate your account \n" +
-                url+"/api/v1/auth/verify?token="+verificationToken.getToken());
+
+        message.setText("Please follow the link below to reset your password: \n" +
+                url+request.token());
 
         try{
             mailSender.send(message);
         }catch (MailException e){
             throw new MailFailureException();
         }
+        return new SendPasswordTokenResponse("The password reset link has been sent to your email.");
     }
     private SimpleMailMessage getSimpleMailMessage() {
         SimpleMailMessage message = new SimpleMailMessage();

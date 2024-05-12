@@ -1,11 +1,11 @@
 package com.projects.ecommerce.api.controller.adress;
 
-import com.projects.ecommerce.api.model.address.CreateAddressBody;
+
 import com.projects.ecommerce.api.model.address.create.CreateAddressOperation;
 import com.projects.ecommerce.api.model.address.create.CreateAddressRequest;
 import com.projects.ecommerce.api.model.address.create.CreateAddressResponse;
 import com.projects.ecommerce.model.User;
-import com.projects.ecommerce.service.address.AddressService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/addresses")
 public class AddressController {
-    private final AddressService addressService;
+
     private final CreateAddressOperation createAddressOperation;
 
     @PostMapping
