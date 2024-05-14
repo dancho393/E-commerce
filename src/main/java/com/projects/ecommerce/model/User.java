@@ -1,5 +1,6 @@
 package com.projects.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,6 +27,7 @@ public class User implements UserDetails {
     @Column(name = "username",nullable = false,unique = true)
     private String username;
     @Column(name = "password",nullable = false,length = 1000)
+    @JsonIgnore
     private String password;
     @Column(name = "email",nullable = false,unique = true,length = 320)
     private String email;

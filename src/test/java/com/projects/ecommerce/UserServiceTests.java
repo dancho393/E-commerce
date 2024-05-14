@@ -1,10 +1,12 @@
 package com.projects.ecommerce;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceTests {
 
+    @Test
     public void testRegisterUser(){
 
     }

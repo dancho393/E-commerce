@@ -23,7 +23,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers(
                                         "/api/v1/auth/**",
                                         "/swagger-ui/**",
-                                        "/v3/api-docs/**"
+                                        "/v3/api-docs/**",
+                                        "/websocket",
+                                        "/websocket/**"
                                 )
                                 .permitAll()
                                 .anyRequest()
